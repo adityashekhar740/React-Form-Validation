@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"; // Import the CSS file for styling
 
 const Form = () => {
@@ -546,9 +547,10 @@ const Form = () => {
     }
     if (!formData.phoneCode) {
       tempErrors.phoneCode = "Country code is required";
-    } else if (!isValidCountryCode(formData.phoneCode)) {
-      tempErrors.phoneCode = "Invalid country code";
-    }
+    } 
+    // else if (!isValidCountryCode(formData.phoneCode)) {
+    //   tempErrors.phoneCode = "Invalid country code";
+    // }
     if (!formData.phoneNumber)
       tempErrors.phoneNumber = "Phone Number is required";
     if (!formData.country) tempErrors.country = "Country is required";
@@ -577,10 +579,10 @@ const Form = () => {
     return password.length >= 8;
   };
 
-  const isValidCountryCode = (code) => {
-    const codeRegex = /^\+[0-9]{2,4}$/;
-    return codeRegex.test(code);
-  };
+  // const isValidCountryCode = (code) => {
+  //   const codeRegex = /^\+[0-9]{1}$/;
+  //   return codeRegex.test(code);
+  // };
 
   const isValidPAN = (pan) => {
     const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
@@ -588,7 +590,7 @@ const Form = () => {
   };
 
   const isValidAadhar = (aadhar) => {
-    const aadharRegex = /^\d{16}$/;
+    const aadharRegex = /^\d{12}$/;
     return aadharRegex.test(aadhar);
   };
 
@@ -606,7 +608,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <h2>Registration Form</h2>
+      <h1 className="text-success" >Registration Form</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>First Name:</label>
@@ -670,13 +672,7 @@ const Form = () => {
         </div>
         <div>
           <label>Phone Number:</label>
-          <input
-            type="text"
-            name="phoneCode"
-            placeholder="Country Code"
-            value={formData.phoneCode}
-            onChange={handleChange}
-          />
+         
           <input
             type="text"
             name="phoneNumber"
@@ -717,39 +713,8 @@ const Form = () => {
         </div>
       )}
         </div>
-        {/* <div>
-          <label>Country:</label>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={(e) => {
-              setFormData({ ...formData, country: e.target.value });
-              fetchCities(e.target.value);
-            }}
-          >
-            <option value="">Select Country</option>
-            {countries.map((country) => (
-              <option key={country.code} value={country.code}>
-                {country.name}
-              </option>
-            ))}
-          </select>
-          {errors.country && (
-            <span className="error-message">{errors.country}</span>
-          )}
-        </div>
-        <div>
-          <label>City:</label>
-          <select name="city" value={formData.city} onChange={handleChange}>
-            <option value="">Select City</option>
-            {cities.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-          {errors.city && <span className="error-message">{errors.city}</span>}
-        </div> */}
+
+
         <div>
           <label>PAN Number:</label>
           <input
